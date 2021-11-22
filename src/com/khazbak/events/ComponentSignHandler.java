@@ -9,14 +9,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 
 
-public class ComponentSign implements Listener {
+public class ComponentSignHandler implements Listener {
     public static void setSign(Sign sign,String[] args){
         for (int i=0;i<args.length;i++) {
             sign.setLine(i, ChatColor.translateAlternateColorCodes('&', args[i]));
-
         }
-
-
         sign.update();
     }
     @EventHandler

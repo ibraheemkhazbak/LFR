@@ -14,7 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
-public class FurnaceEvent implements Listener {
+public class FurnaceEventHandler implements Listener {
     @EventHandler
     public void burnEvent(FurnaceBurnEvent e){
 
@@ -25,7 +25,6 @@ public class FurnaceEvent implements Listener {
         if(component!=null && component instanceof Generator){
             Generator generator=((Generator)component);
             generator.function(e);
-            PluginMethods.ConsoleLog("Generator Works "+e.getBurnTime());
             Main.scheduler.scheduleSyncDelayedTask(Main.plugin, new Runnable() {
                 @Override
                 public void run() {
@@ -38,19 +37,16 @@ public class FurnaceEvent implements Listener {
     }
     @EventHandler
     public void genOff(GenOffEvent e){
-        PluginMethods.ConsoleLog("excuting furnace off");
         Furnace furnace=((Furnace) e.getBlock().getState());
-
-        PluginMethods.ConsoleLog("casted furnace");
         Generator generator=(Generator) Component.getComponent(e.getBlock());
-        PluginMethods.ConsoleLog("casted gen");
-        PluginMethods.ConsoleLog(furnace.getBurnTime()+"");
 
         if(furnace.getBurnTime()==0){
             generator.setGenerating(false);
             generator.updateSign();
         }
     }
+
+    // WHEN A FURNACE INVENTORY IS OPENED
     @EventHandler
     public void inventoryInteract(InventoryCloseEvent e){
      Block block=   e.getInventory().getLocation().getBlock();

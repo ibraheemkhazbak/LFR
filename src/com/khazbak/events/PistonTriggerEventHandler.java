@@ -16,9 +16,9 @@ import org.bukkit.event.block.BlockPistonExtendEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PistonTrig implements Listener {
+public class PistonTriggerEventHandler implements Listener {
     @EventHandler
-    public void onPistonTrig(BlockPistonExtendEvent e) {
+    public void onPistonTrigger(BlockPistonExtendEvent e) {
        if(Component.componentExists(e.getBlock())) {
            ((Crusher) Component.getComponent(e.getBlock())).function(e);
        }

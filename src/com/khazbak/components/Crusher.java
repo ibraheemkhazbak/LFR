@@ -1,19 +1,27 @@
 package com.khazbak.components;
 
-import com.khazbak.PluginMethods;
+import com.khazbak.events.ComponentSignHandler;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 
 import java.util.List;
 
-public class Crusher extends IComponent {
+public class Crusher extends In {
 
-    public Crusher(Block block, Sign sign,int maxPower) {
-        super(block,sign,maxPower);
+    public Crusher(Block block, Sign sign) {
+
+        super(block,sign,1,1000);
        componentName="Crusher";
-        Component.components.put(PluginMethods.blockKey(block),this);
         updateSign();
+    }
+
+    public void updateSign(){
+        info[0]="&9[&f"+componentName+"&9]&r";
+        info[1]= "&7"+getPower()+"/"+maxPower;
+        info[2]=isPowered()?"&aPowered":"&cNo Power";
+        info[3]=isConnected()?"&aConnected":"&cDisconnected";
+        ComponentSignHandler.setSign(getSign(),info);
     }
 
 
@@ -28,7 +36,5 @@ public class Crusher extends IComponent {
 
             }
         }
-
     }
-
 }

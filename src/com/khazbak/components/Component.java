@@ -26,6 +26,7 @@ public class Component {
         this.block = block;
         this.sign = sign;
         info=new String[4];
+        Component.components.put(PluginMethods.blockKey(block),this);
     }
     public void function(Object o){
 
@@ -42,7 +43,7 @@ public class Component {
             if (e.getLine(0).equalsIgnoreCase("[crusher]")) {
                 if (onBlock.getType() == Material.PISTON) {
                    e.setCancelled(true);
-                    new Crusher(onBlock,(Sign) block.getState(),10000);
+                    new Crusher(onBlock,(Sign) block.getState());
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aSuccessfully placed component"));
                     return;
                 }
